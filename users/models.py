@@ -9,7 +9,7 @@ class User(AbstractBaseUser, PermissionsMixin, AbstractSoftDeletableModel):
     username = models.CharField(max_length=100, unique=True)
     created_at = models.DateTimeField(default=timezone.now)
     
-    is_staff = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False) 
     is_active = models.BooleanField(default=True)
 
     USERNAME_FIELD = 'email'
