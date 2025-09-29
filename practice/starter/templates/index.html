@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Main page</h1>
+    <a
+      id="btn1"
+      href="{% url 'hello' %}"
+      style="
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #4400ff;
+        color: white;
+        text-decoration: none;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      "
+      >Click me to 1 (Hello)</a
+    >
+    <a
+      id="btn2"
+      href="{% url 'users' %}"
+      style="
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      "
+      >Click me to 2 (Users)</a
+    >
+    <a id="btn4" href="{% url 'city-time' %}" style="
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  ">Click me to 3 (City Time)</a>
+  <a id="btn5" href="{% url 'counter' %}" style="
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #28a745;
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+">Click me to 4 (Counter)</a>
+  </body>
+
+  <script>
+    console.log("Hello from Django!");
+  </script>
+</html>
