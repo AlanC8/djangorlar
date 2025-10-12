@@ -1,30 +1,25 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
-from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.utils import timezone
-from django.utils.translation import gettext_lazy as _
+from abstracts.models import AbstractSoftDeletableModel
 from .managers import UserManager
 
-class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField('Email', unique=True)
-    first_name = models.CharField('First name', max_length=150, blank=True)
-    last_name = models.CharField('Last name', max_length=150, blank=True)
-
+class User(AbstractBaseUser, PermissionsMixin, AbstractSoftDeletableModel): 
+    email = models.EmailField(unique=True)
+    username = models.CharField(max_length=100, unique=True)
+    created_at = models.DateTimeField(default=timezone.now)
+    
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    date_joined = models.DateTimeField(default=timezone.now)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
-    
+    REQUIRED_FIELDS = ['username']
+
     objects = UserManager()
-    
+
+    class Meta:
+        verbose_name = 'User'
+        verbose_name_plural = 'Users'
+
     def __str__(self):
         return self.email
-    
-    def get_full_name(self):
-        return f"{self.first_name} {self.last_name}"
-    
-    def get_short_name(self):
-        return self.first_name
-    

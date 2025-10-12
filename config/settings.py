@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,6 +33,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'unfold',
+    "unfold.contrib.filters",  # optional, if special filters are needed
+    "unfold.contrib.forms",  # optional, if special form elements are needed
+    "unfold.contrib.inlines",  # optional, if special inlines are needed
+    "unfold.contrib.import_export",  # optional, if django-import-export package is used
+    "unfold.contrib.guardian",  # optional, if django-guardian package is used
+    "unfold.contrib.simple_history",  # optional, if django-simple-history package is used
+    "unfold.contrib.location_field",  # optional, if django-location-field package is used
+    "unfold.contrib.constance",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'habits',
+    'abstracts'
 ]
 
 MIDDLEWARE = [
@@ -49,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.locale.LocaleMiddleware",
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -101,6 +114,54 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+UNFOLD = {
+    "SITE_TITLE": "CoHabit-tracker app", 
+    "SITE_HEADER": "Adminka",     
+    "SITE_ICON": "/static/logo.jpg",  
+    "THEME": "dark",
+    "COLORS": {
+    "primary": {
+        "50": "#f5f3ff",
+        "100": "#ede9fe",
+        "200": "#ddd6fe",
+        "300": "#c4b5fd",
+        "400": "#a78bfa",
+        "500": "#00bf63",
+        "600": "#7c3aed",
+        "700": "#6d28d9",
+        "800": "#5b21b6",
+        "900": "#4c1d95",
+        "950": "#2e1065"
+    },
+    
+    "base": {
+        "50": "#f8fafc",
+        "100": "#f1f5f9",
+        "200": "#e2e8f0",
+        "300": "#cbd5e1",
+        "400": "#94a3b8",
+        "500": "#64748b",
+        "600": "#475569",
+        "700": "#334155",
+        "800": "#1e293b",
+        "900": "#0f172a",
+        "950": "#020617"
+    },
+},
+    "SHOW_HISTORY": True,
+    "DARK_MODE": True,
+    "SIDEBAR": {
+        "show_search": True,
+        "show_all_applications": True,
+    },
+    "COMMAND": {
+        "search_models": "config.utils.search_panel",  
+        "search_callback": "config.utils.search_callback",
+        "show_history": True,
+    },
+    "SHOW_LANGUAGES": True,
+}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
@@ -113,6 +174,10 @@ USE_I18N = True
 
 USE_TZ = True
 
+LANGUAGES = (
+    ("ru", _("Russian")),
+    ("en", _("English")),
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
